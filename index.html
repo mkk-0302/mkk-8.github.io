@@ -4,8 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>総合制作実習</title>
+    <script>
+        // ページが読み込まれたときに実行される関数
+        window.onload = function() {
+            const message = document.getElementById("message");
+            message.textContent = "こんにちは、AR技術の世界へようこそ！";
+        };
+    </script>
 </head>
 <body>
-    <p>こんにちは,AR技術</p>
+    <p id="message">こんにちは,AR技術</p>
 </body>
 </html>
+
