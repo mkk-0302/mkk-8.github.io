@@ -1,19 +1,28 @@
 
 <!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>総合制作実習</title>
-    <script>
-        // ページが読み込まれたときに実行される関数
-        window.onload = function() {
-            const message = document.getElementById("message");
-            message.textContent = "こんにちは";
-        };
-    </script>
-</head>
-<body>
-    <p id="message">こんにちは,AR技術</p>
-</body>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.0.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"></script>
+    <script>
+      mobilenet.load().then(model => {
+        const img = document.getElementById('myImage');
+        // Classify the image
+        model.classify(img).then(predictions => {
+          console.log('Predictions: ', predictions);
+          // Was there a truck?
+          let foundATruck
+          predictions.forEach(p => {
+            foundATruck = foundATruck || p.className.includes("truck")
+          })
+          // TRUCK ALERT!
+          if (foundATruck) alert("TRUCK DETECTED!")
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Is this a truck?</h1>
+    <img id="myImage" src="truck.jpg" width="100%"></img>
+  </body>
 </html>
-
